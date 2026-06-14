@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="day">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FlySmart — Admin</title>
+<meta name="description" content="FlySmart admin dashboard (prototype, mock data)." />
+<link rel="icon" href="../shared/img/logo-mark.png" />
+<!-- restore the saved day/night choice before first paint (shared across all screens) -->
+<script>try{if(localStorage.getItem("fs-theme")==="night")document.documentElement.setAttribute("data-theme","night");}catch(e){}</script>
+<link rel="stylesheet" href="../shared/css/tokens.css" />
+<link rel="stylesheet" href="assets/css/app.css" />
+</head>
+<body>
+  <!-- ===== App shell ===== -->
+  <div class="app" id="app">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar" aria-label="Primary">
+      <div class="side-brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-word">FlySmart</span>
+        <button class="rail-toggle" id="railToggle" aria-label="Collapse sidebar" title="Collapse / expand">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
+        </button>
+      </div>
+
+      <nav class="nav" id="nav">
+        <a class="nav-item" href="#/dashboard" data-section="dashboard">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 13h8V3H3v10Zm0 8h8v-6H3v6Zm10 0h8V11h-8v10Zm0-18v6h8V3h-8Z"/></svg>
+          <span class="nav-label">Dashboard</span>
+        </a>
+        <a class="nav-item" href="#/users" data-section="users">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 11a4 4 0 1 0-4-4 4 4 0 0 0 4 4Zm-8 1a3 3 0 1 0-3-3 3 3 0 0 0 3 3Zm0 2c-2.7 0-6 1.34-6 4v2h7v-2c0-1.1.45-2.07 1.2-2.85A9.4 9.4 0 0 0 8 14Zm8 0c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4Z"/></svg>
+          <span class="nav-label">Users</span>
+        </a>
+        <a class="nav-item" href="#/models" data-section="models">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 2 7l10 5 10-5-10-5Zm0 7.5L4.2 6 12 2.2 19.8 6 12 9.5ZM2 17l10 5 10-5-2.1-1.05L12 19.6 4.1 15.95 2 17Zm0-5 10 5 10-5-2.1-1.05L12 14.6 4.1 10.95 2 12Z"/></svg>
+          <span class="nav-label">LLMs</span>
+        </a>
+        <a class="nav-item" href="#/documents" data-section="documents">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6H6Zm7 1.5L18.5 9H13V3.5ZM8 13h8v2H8v-2Zm0 4h8v2H8v-2Z"/></svg>
+          <span class="nav-label">Documents</span>
+        </a>
+        <a class="nav-item" href="#/chats" data-section="chats">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H8l-5 4V5a1 1 0 0 1 1-1Zm3 5v2h10V9H7Zm0 4v2h7v-2H7Z"/></svg>
+          <span class="nav-label">Chat history</span>
+        </a>
+        <a class="nav-item" href="#/feedback" data-section="feedback">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 21V10l4-7a2 2 0 0 1 2.7 1.8V8h4.8a2 2 0 0 1 2 2.4l-1.3 6.5a2 2 0 0 1-2 1.6H7Z"/><path d="M7 10H4a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3"/></svg>
+          <span class="nav-label">Feedback</span>
+        </a>
+        <a class="nav-item" href="#/logs" data-section="logs">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v3H4V4Zm0 6.5h16v3H4v-3ZM4 17h10v3H4v-3Z"/></svg>
+          <span class="nav-label">Logs</span>
+        </a>
+        <a class="nav-item" href="#/tickets" data-section="tickets">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5a2 2 0 0 0-2 2v3a2 2 0 0 1 0 4v3a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-3a2 2 0 0 1 0-4V7a2 2 0 0 0-2-2H4Zm10 2 2 0v2h-2V7Zm0 4h2v2h-2v-2Zm0 4h2v2h-2v-2Z"/></svg>
+          <span class="nav-label">Tickets</span>
+        </a>
+      </nav>
+
+      <button class="chat-cta" id="chatCta" title="Open the chat interface">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H8l-4 3V6a1 1 0 0 1 1-1Z"/></svg>
+        <span class="nav-label">Open Chat</span>
+        <svg class="cta-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+      <button class="side-logout" id="logoutBtn" title="Log out">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5M21 12H9"/></svg>
+        <span class="nav-label">Log out</span>
+      </button>
+    </aside>
+
+    <div class="scrim-side" id="scrimSide" hidden></div>
+
+    <!-- Main column -->
+    <div class="main">
+      <header class="topbar">
+        <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open menu">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </button>
+        <h1 class="page-title" id="pageTitle">Dashboard</h1>
+
+        <div class="topbar-search">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          <input type="search" id="globalSearch" placeholder="Search…" aria-label="Search" />
+        </div>
+
+        <button class="theme-toggle" id="themeToggle" aria-label="Switch day / night" title="Day / night">
+          <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>
+          <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z"/></svg>
+        </button>
+
+        <button class="account" id="account" aria-label="Open your profile">
+          <span class="avatar">AF</span>
+          <span class="acct-meta"><span class="acct-name">Aliakbar Fakhar</span><span class="acct-role">Owner</span></span>
+          <svg class="acct-caret" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+      </header>
+
+      <main class="content" id="content" tabindex="-1"><!-- rendered by app.js --></main>
+    </div>
+  </div>
+
+  <!-- ===== Speed-dial FAB (backdrop is a sibling BEFORE the wrap so the FAB + actions
+        stay sharp above the dim/blur) ===== -->
+  <div class="fab-backdrop" id="fabBackdrop" hidden></div>
+  <div class="fab-wrap" id="fabWrap">
+    <ul class="fab-actions" id="fabActions" aria-hidden="true">
+      <li><button class="fab-action" data-add="user" aria-label="Add user"><span class="fab-tag">Add user</span><span class="fab-mini" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span></button></li>
+      <li><button class="fab-action" data-add="subject" aria-label="Add aircraft or topic"><span class="fab-tag">Add aircraft / topic</span><span class="fab-mini" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5Z"/></svg></span></button></li>
+      <li><button class="fab-action" data-add="document" aria-label="Add document"><span class="fab-tag">Add document</span><span class="fab-mini" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5"/></svg></span></button></li>
+      <li><button class="fab-action" data-add="model" aria-label="Add model"><span class="fab-tag">Add model</span><span class="fab-mini" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="2"/><path d="M10 2v3M14 2v3M10 19v3M14 19v3M2 10h3M2 14h3M19 10h3M19 14h3"/></svg></span></button></li>
+    </ul>
+    <button class="fab" id="fab" aria-label="Quick add" aria-expanded="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+    </button>
+  </div>
+
+  <!-- ===== Modal host ===== -->
+  <div class="modal-host" id="modalHost" hidden>
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><!-- filled by app.js --></div>
+  </div>
+
+  <div class="toast-host" id="toastHost" aria-live="polite"></div>
+
+  <script type="module" src="assets/js/app.js"></script>
+</body>
+</html>

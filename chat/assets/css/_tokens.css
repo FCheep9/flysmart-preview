@@ -1,0 +1,91 @@
+/* ============================================================
+   FlySmart — shared design tokens (gathered reference)
+   Lifted verbatim from admin-dashboard/assets/css/app.css (the
+   design-system header only — NOT the admin layout). This is the
+   look-and-feel baseline for the chat interface: navy ink + azure,
+   Bricolage Grotesque (display) + Manrope (body), glass-as-accent,
+   day + night themes. Build the chat UI on top of these.
+   ============================================================ */
+
+/* Typefaces come from shared/css/tokens.css (linked in index.html). */
+
+/* ---------- DAY THEME (default) ---------- */
+:root{
+  --ink:#0b2444; --ink-2:#3a5470; --ink-3:#566d88;   /* ink-3 darkened for AA contrast on light surfaces */
+  --azure:#0b6bff; --azure-deep:#0a47c2; --azure-soft:rgba(11,107,255,.12);
+  --good:#0f7a45; --good-soft:#e8f6ee;
+  --warn:#9a6400; --warn-soft:#fff4e0;
+  --danger:#c62828; --danger-soft:#fdecec;
+  --violet:#6b29c2; --violet-soft:#f3eaff;
+
+  --page:#eef3fa;            /* app background */
+  --surface:#ffffff;         /* cards, tables (clean solid) */
+  --surface-2:#f7faff;       /* subtle fills */
+  --line:#e6edf5;            /* borders */
+  --line-2:#eef2f7;
+  --rail:#0b2444;            /* sidebar (navy) */
+  --rail-ink:#dbe7ff;
+  --rail-ink-2:#8fa6cf;
+  --rail-active:#0b6bff;
+  --avatar-bg:#0b2444;       /* avatars / FAB tag — stays dark with white text in BOTH themes */
+
+  /* glass accent (topbar, modals, FAB) */
+  --glass:rgba(255,255,255,.72);
+  --glass-edge:rgba(255,255,255,.85);
+  --glass-blur:saturate(140%) blur(16px);
+
+  --shadow-sm:0 2px 8px -3px rgba(8,24,53,.18);
+  --shadow:0 18px 40px -26px rgba(8,24,53,.4);
+  --shadow-lg:0 30px 70px -28px rgba(8,24,53,.5);
+
+  --r-sm:9px; --r:12px; --r-lg:16px; --r-xl:22px;
+  --body:"Manrope",system-ui,-apple-system,sans-serif;
+  --display:"Bricolage Grotesque",var(--body);
+  --t:200ms cubic-bezier(.2,.7,.3,1);
+
+  --sidebar-w:296px; --rail-w:76px; --topbar-h:64px;
+}
+
+/* ---------- NIGHT THEME ---------- */
+html[data-theme="night"]{
+  --ink:#eef4ff; --ink-2:#aebed8; --ink-3:#7e93b8;
+  --azure:#4f9bff; --azure-deep:#2f6fdc; --azure-soft:rgba(79,155,255,.16);
+  --good:#37d39a; --good-soft:rgba(55,211,154,.14);
+  --warn:#f0b429; --warn-soft:rgba(240,180,41,.14);
+  --danger:#ff8a8a; --danger-soft:rgba(255,138,138,.13);
+  --violet:#a78bfa; --violet-soft:rgba(167,139,250,.16);
+
+  --page:#0a1430;
+  --surface:#13213f;
+  --surface-2:#16264a;
+  --line:#243a63;
+  --line-2:#1d2f55;
+  --rail:#0a1024;
+  --rail-ink:#dbe7ff;
+  --rail-ink-2:#7287ad;
+  --rail-active:#0b6bff;
+  --avatar-bg:#2c4f86;       /* lighter navy in night so initials stay legible */
+
+  --glass:rgba(18,30,58,.66);
+  --glass-edge:rgba(120,150,210,.22);
+
+  --shadow-sm:0 2px 10px -3px rgba(0,0,8,.5);
+  --shadow:0 18px 40px -24px rgba(0,0,8,.7);
+  --shadow-lg:0 30px 70px -26px rgba(0,0,8,.8);
+}
+
+/* ---------- base resets ---------- */
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%}
+body{font-family:var(--body);color:var(--ink);background:var(--page);min-height:100dvh;
+  -webkit-font-smoothing:antialiased;transition:background var(--t),color var(--t);overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+svg{display:block}
+::selection{background:var(--azure-soft)}
+
+/* page background atmosphere (subtle, not behind data) */
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(80% 60% at 100% 0%, var(--azure-soft), transparent 60%),
+             radial-gradient(70% 50% at 0% 100%, rgba(107,41,194,.06), transparent 55%)}

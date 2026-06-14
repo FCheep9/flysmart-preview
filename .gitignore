@@ -1,0 +1,12 @@
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*~
+.vscode/
+.idea/
+
+# Node (not used — pure static — but ignore if anyone runs tooling)
+node_modules/
+
+# Superpowers working dir
+.superpowers/

@@ -1,0 +1,12 @@
+# Brainstorming companion temp files
+.superpowers/
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Node (only if a local build tool is ever added; build output is committed, deps are not)
+node_modules/
